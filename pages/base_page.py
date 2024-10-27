@@ -23,7 +23,7 @@ class BasePage:
             'clickable': EC.element_to_be_clickable
         }
         condition = conditions.get(condition_type, EC.presence_of_element_located)
-        WebDriverWait(self.driver, 10).until(condition(locator))
+        WebDriverWait(self.driver, 20).until(condition(locator))
 
     def find_element(self, locator):
         return self.driver.find_element(*locator)

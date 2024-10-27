@@ -16,7 +16,7 @@ class AccountPage(BasePage):
     
     @allure.step('Поиск номера заказа в истории заказов')
     def search_number_in_orders_history(self):
-        self.wait_for_element(AccountPageLocators.ORDER_NUMBER_BOX)
+        self.wait_for_element(AccountPageLocators.ORDER_NUMBER_BOX, 'visibility')
         orders_history_number = self.get_text(AccountPageLocators.ORDER_NUMBER_TEXT)
         return orders_history_number.lstrip('#0')
     

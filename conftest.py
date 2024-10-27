@@ -6,10 +6,7 @@ import src.data
 
 @pytest.fixture(scope='function')
 def create_user():
-    user_data = src.helpers.generate_user_data()
-    email = user_data['email']
-    password = user_data['password']
-    name = user_data['name']
+    email, password, name = src.helpers.generate_user_data()
     payload = {
         'email': email,
         'password': password,
@@ -18,38 +15,31 @@ def create_user():
     response = requests.post(src.data.CREATE_USER_API_URL, data=payload)
     token = response.json().get("accessToken")
     
-    yield email, password
+    yield email, password, name
     requests.delete(src.data.DELETE_USER_API_URL, headers={"Authorization": f'{token}'})
     
-@pytest.fixture(scope='function', browsers=['chrome', 'firefox'])
+@pytest.fixture(scope='function', params=['chrome', 'firefox'])
 def driver(request):
-    if request.browser == 'chrome':
+    if request.param == 'chrome':
         web_driver = webdriver.Chrome()
-    elif request.browser == 'firefox':
+    elif request.param == 'firefox':
         web_driver = webdriver.Firefox()
         
     yield web_driver
     web_driver.quit()
     
 @pytest.fixture(scope='function')
-def login_user(create_user):
-    user_data = create_user
-    email = user_data['email']
-    password = user_data['password']
+def login_user_and_create_order(create_user):
+    email, password, _ = create_user
     payload = {
         'email': email,
         'password': password,
     }
     response = requests.post(src.data.LOGIN_USER_API_URL, data=payload)
     token = response.json().get("accessToken")
-    yield token
-
-@pytest.fixture(scope='function')
-def create_order(login_user):
-    token = login_user
     payload = {
         "ingredients": [src.data.CRATER_BUN_ID, src.data.FILLET_MAIN_ID, src.data.CHEESE_MAIN_ID, src.data.SPICY_SAUCE_ID]
     }
     response = requests.post(src.data.CREATE_ORDER_API_URL, headers={"Authorization": f'{token}'}, data=payload)
     number = str(response.json()['order']['number'])
-    return number
+    yield email, password, number

@@ -13,8 +13,7 @@ def generate_random_string(length):
 
 # Функция для генерации данных пользователя
 def generate_user_data():
-    return {
-        "email": fake.email(),
-        "password": generate_random_string(12),
-        "name": fake.name()
-    }
+    email = fake.email()
+    password = generate_random_string(12)
+    name = fake.name()
+    return email, password, name
