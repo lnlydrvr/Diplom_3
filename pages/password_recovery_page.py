@@ -11,7 +11,7 @@ class PasswordRecoveryPage(BasePage):
         
     @allure.step('Заполнение формы на странице восстановления пароля')
     def fill_email_input_form(self, create_user):
-        email, _ = create_user
+        email, _, _ = create_user
         self.send_keys(PasswordRecoveryPageLocators.EMAIL_INPUT_FORM, email)
         
     @allure.step('Кликнуть на кнопку Восстановить')
@@ -21,7 +21,7 @@ class PasswordRecoveryPage(BasePage):
         
     @allure.step('Ввод пароля в форму на странице восстановления пароля')
     def fill_password_reset_input_form(self, create_user):
-        password, _ = create_user
+        _, password, _ = create_user
         self.send_keys(PasswordRecoveryPageLocators.PASSWORD_RESET_INPUT_FORM, password)
         
     @allure.step('Клик на иконку скрытия пароля (глаз)')

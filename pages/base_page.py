@@ -36,13 +36,6 @@ class BasePage:
         self.wait_for_element(locator, 'clickable')
         self.find_element(locator).click()
 
-    def scroll_to_element(self, locator):
-        element = self.find_element(locator)
-        self.driver.execute_script('arguments[0].scrollIntoView();', element)
-
-    def switch_to_window(self, number):
-        self.driver.switch_to.window(self.driver.window_handles[number])
-
     def send_keys(self, locator, text):
         self.wait_for_element(locator, 'visibility')
         self.find_element(locator).send_keys(text)

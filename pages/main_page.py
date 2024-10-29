@@ -36,10 +36,15 @@ class MainPage(BasePage):
     def add_ingredients_in_burger(self):
         self.wait_for_element(MainPageLocators.BUN_COUNTER_CLASS, 'visibility')
         self.drag_drop(MainPageLocators.BUN_INGREDIENT_TEXT, MainPageLocators.CONSTRUCTOR_ADD_SECTION)
+    
+    @allure.step('Проверить счетчик ингредиента до добавления ингредиента')
+    def check_ingredient_counter_before(self):
+        self.wait_for_element(MainPageLocators.BUN_COUNTER_CLASS, 'visibility')
         return self.get_text(MainPageLocators.BUN_COUNTER_CLASS)
     
-    @allure.step('Проверить счетчик ингредиента')
-    def check_ingredient_counter(self):
+    @allure.step('Проверить счетчик ингредиента после добавления ингредиента')
+    def check_ingredient_counter_after(self):
+        self.wait_for_element(MainPageLocators.BUN_COUNTER_CLASS, 'visibility')
         return self.get_text(MainPageLocators.BUN_COUNTER_CLASS)
     
     @allure.step('Нажать на кнопку Оформить заказ')

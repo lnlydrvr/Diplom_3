@@ -3,7 +3,7 @@ from selenium.webdriver.common.by import By
 class FeedPageLocators:
     ORDER_FEED_BUTTON = By.XPATH, '//p[text()="Лента Заказов"]'
     ORDER_FEED_HEADER = By.XPATH, '//h1[text()="Лента заказов"]'
-    ORDER_BLOCK = By.XPATH, '//a[@class="OrderHistory_link__1iNby"]'
+    ORDER_BLOCK = By.XPATH, '//a[contains(@class, "OrderHistory_link")]'
     ORDER_BLOCK_POPUP = By.XPATH, '//div[contains(@class, "Modal_orderBox")]'
     ORDER_NUMBER_TEXT = By.XPATH, '//p[contains(@class, "text_type_digits")]'
     ORDER_COUNTER_ALL_TIME = By.XPATH, '//p[contains(@class, "text_type_digits-large")]'
