@@ -1,4 +1,3 @@
-import src.data
 from pages.feed_page import FeedPage
 from pages.login_page import LoginPage
 from pages.account_page import AccountPage
@@ -59,8 +58,8 @@ class TestFeedOrdersPage:
         
         assert counter_before != counter_after
         
-    @allure.title('Проверка увеличения счетчика В работе после создания заказа')
-    def test_check_rise_counter_at_work_after_made_order(self, driver, login_user_and_create_order):
+    @allure.title('Проверка наличия номера заказа в статусе В работе после его создания')
+    def test_check_order_status_in_work_after_order_creation(self, driver, login_user_and_create_order):
         login_page = LoginPage(driver)
         login_page.open_login_page()
         number = login_page.user_login_with_order(login_user_and_create_order)
