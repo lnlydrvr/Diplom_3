@@ -42,4 +42,4 @@ def login_user_and_create_order(create_user):
     }
     response = requests.post(src.data.CREATE_ORDER_API_URL, headers={"Authorization": f'{token}'}, data=payload)
     number = str(response.json()['order']['number'])
-    yield email, password, number
+    return email, password, number
